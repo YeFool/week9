@@ -64,5 +64,5 @@ module.exports = {
     hashPass,
     comparePass,
     tokenCheck,
-    tokenDeleteCheck
+   
 }
