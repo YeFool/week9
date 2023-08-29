@@ -58,25 +58,6 @@ const comparePass = async (req, res, next) => {
         }
     }
 
-    const tokenDeleteCheck = async (req, res, next) => {
-        try {
-            const token = req.header("Authorization")
-            const decodedToken = await jwt.verify(token, process.env.SECRET)
-            const user = await User.destroy ({where: {id: decodedToken.id}})
-
-            if (!user) {
-                throw new Error("Unable to delete user")
-            }
-
-            req.authUser = user;
-
-
-            next();
-            
-        } catch (error) {
-            res.status(501).json({errorMessage: error.message, error: error})
-        }
-    }
 
 
 module.exports = {
