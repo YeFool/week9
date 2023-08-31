@@ -54,18 +54,23 @@ const getAllUsers = async (req, res) => {
 };
 
 
-const deleteUser = async (req, res) => {
+const  deleteUser = async (req, res) => {
     try {
-        const destroyUser = await User.destroy({
+        const deletedUser = await User.destroy({
             where: {
-                username: req.body.username
-            }
-        });
-        res.status(201).json({message: "Successfully deleted", result: destroyUser});
+                username: req.body.username || null
+           }
+        })
+        res.status(201).json({
+            message: "Successfully deleted",
+             amount: deletedUser
+            })
     } catch (error) {
-        res.status(501).json({errorMessage: error.message, error: error});
+        res.status(501).json({ errorMessage: error.message, error: error})
+        console.log(error)
     }
-};
+}
+
 
 const updateUser = async (req, res) => {
     try {
