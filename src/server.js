@@ -8,8 +8,9 @@ const User = require("./users/model")
 const port = process.env.PORT || 5001
 
 const app = express()
-app.use(cors());
 app.use(express.json())
+app.use(cors());
+
 
 app.use(userRouter);
 
