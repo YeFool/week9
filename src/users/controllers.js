@@ -16,31 +16,26 @@ const registerUser = async (req, res) => {
     }
 };
 
-    const userLogin = async (req, res) => {
-        try{
-            if (req.authUser) {
-                res.status(200).json({message: "Successful", user:{
-                    username: req.authUser.username || null,
-                    email: req.authUser.email || null,
-                    // password: req.authUser.password
-                }})
-                return
-            }
-
-            const token = jwt.sign({id: req.user.id}, process.env.SECRET)
-            res.status(200).json ({
-                message: "success",
-                user: {
-                    username: req.body.username,
-                    email: req.body.email,
-                    token: token
-                }
-            })
-        } catch {
-            res.status(501).json({errorMessage: error.message, error: error});
+const userLogin = async (req, res) => {
+    try {
+        if (req.authUser) {
+            res.status(200).json({
+                message: "Success",
+                user: {username: req.authUser.username, email: req.authUser.email}
+            })  
+            return
         }
+        const token = jwt.sign({id: req.user.id}, process.env.SECRET)
 
+        res.status(200).json({
+            message: "Login success",
+            user: {username: req.body.username, email: req.body.email, token: token}
+        })
+    } catch (error) {
+        res.status(501).json({ errorMessage: error.message, error: error})
+        console.log(error)
     }
+}
 
 
 const getAllUsers = async (req, res) => {
