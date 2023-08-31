@@ -20,8 +20,8 @@ const registerUser = async (req, res) => {
         try{
             if (req.authUser) {
                 res.status(200).json({message: "Successful", user:{
-                    username: req.authUser.username,
-                    email: req.authUser.email,
+                    username: req.authUser.username || null,
+                    email: req.authUser.email || null,
                     // password: req.authUser.password
                 }})
                 return
