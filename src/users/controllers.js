@@ -71,8 +71,7 @@ const updateUser = async (req, res) => {
     try {
         const userUpdate = await User.update(
             {
-                password: req.body.password,
-                email: req.body.email
+                [req.body.key]: req.body.newKey
             },
             {
                 where: {
